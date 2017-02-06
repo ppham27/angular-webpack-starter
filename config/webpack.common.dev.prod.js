@@ -20,6 +20,7 @@ module.exports = webpackMerge(commonConfig, {
       ]
     }),
     new HtmlWebpackPlugin({
+      favicon: 'public/favicon.ico',
       template: 'src/index.html'
     }),
   ]

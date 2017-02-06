@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import '../../public/favicon.ico';
 import '../../public/scss/styles.scss';
 
 @Component({
