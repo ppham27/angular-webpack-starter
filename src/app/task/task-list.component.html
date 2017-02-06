@@ -1,0 +1,5 @@
+<h2>Task List</h2>
+<span *ngIf="tasks.length === 0">There are no tasks.</span>
+<ul *ngIf="tasks.length > 0">
+  <li *ngFor="let task of tasks">{{task.getDescription() | async}}</li>
+</ul>
