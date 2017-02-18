@@ -1,0 +1,17 @@
+<span [@visible]="isEditable">
+  <span *ngIf="!isEditable">
+    <ng-content select="[readonlyView]"></ng-content>
+    <button md-button md-icon-button (click)="edit()">
+      <md-icon>mode_edit</md-icon>
+    </button>
+  </span>
+  <span *ngIf="isEditable">
+    <ng-content select="[editView]"></ng-content>
+    <button md-icon-button md-mini-fab (click)="save()">
+      <md-icon>done</md-icon>
+    </button>
+    <button md-icon-button md-mini-fab (click)="cancel()">
+      <md-icon>clear</md-icon>
+    </button>
+  </span>
+</span>
