@@ -8,8 +8,7 @@
                    (onSave)="task.save()"
                    (onCancel)="task.setName($event)">
         <span readonlyView>{{task.getName()}}</span>
-        <input editView type="text" #editor
-               [focusWhen]="editor.parentNode"
+        <input editView type="text" focusOnEdit
                [value]="task.getName()" (input)="task.setName($event.target.value)">
       </toggle-edit>
     </span>

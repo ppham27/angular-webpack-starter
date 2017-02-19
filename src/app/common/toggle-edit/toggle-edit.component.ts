@@ -1,4 +1,6 @@
-import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, animate, transition, style, trigger} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, animate, transition, style, trigger, ContentChild} from '@angular/core';
+
+import {FocusOnEdit} from './focus-on-edit.directive';
 
 @Component({
   selector: 'toggle-edit',
@@ -8,7 +10,7 @@ import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeD
     trigger('visible', [
       transition('* => *', [
         style({opacity: 0}),
-        animate('1000ms ease-in-out', style({opacity: 1}))
+        animate('500ms ease-in-out', style({opacity: 1}))
       ])
     ])
   ],
@@ -18,6 +20,8 @@ export class ToggleEditComponent<V> {
   @Input('model') modelValue: V;
   @Output() onCancel: EventEmitter<V> = new EventEmitter<V>();
   @Output() onSave: EventEmitter<V> = new EventEmitter<V>();
+  @ContentChild(FocusOnEdit) editor: HTMLSpanElement;
+
   isEditable = false;
   private originalValue: V;
 
@@ -27,6 +31,7 @@ export class ToggleEditComponent<V> {
     this.originalValue = this.modelValue;
     this.isEditable = true;
     this.changeDetectorRef.detectChanges();
+    this.editor.focus();
   }
 
   save() {
@@ -34,12 +39,10 @@ export class ToggleEditComponent<V> {
       this.onSave.emit(this.modelValue);
     }
     this.isEditable = false;
-    this.changeDetectorRef.detectChanges();
   }
 
   cancel() {
     this.onCancel.emit(this.originalValue);
     this.isEditable = false;
-    this.changeDetectorRef.detectChanges();
   }
 }
